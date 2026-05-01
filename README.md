@@ -63,23 +63,6 @@ This portfolio showcases my:
 
 ---
 
-## 📁 Project Structure
-
-prakash-portfolio/
-│
-├── index.html
-├── captain.html
-├── innings.html
-├── playbook.html
-├── dressing-room.html
-│
-├── assets/
-│ ├── styles.css
-│ ├── script.js
-│ ├── images/
-│ └── resume.pdf
-
----
 
 ## 🎯 Purpose
 
