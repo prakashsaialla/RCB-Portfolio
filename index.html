@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prakash Sai Alla · The Dugout</title>
+  <meta name="description" content="Prakash Sai Alla - Data Analyst. Play Bold. Analyze Bolder.">
+  <link rel="icon" type="image/png" href="assets/images/rcb-logo-dark.png">
+  <link rel="stylesheet" href="assets/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    .hero {
+      position: relative;
+      margin-top: 0;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      overflow: hidden;
+      background:
+        linear-gradient(rgba(8,8,8,0.82), rgba(8,8,8,0.75)),
+        url('assets/images/bg-stadium.jpg') center/cover no-repeat;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      padding: 0 30px;
+    }
+    .hero-spacer { display: none; }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 15% 60%, rgba(204,0,0,0.1) 0%, transparent 55%),
+        radial-gradient(ellipse at 85% 40%, rgba(212,160,23,0.05) 0%, transparent 55%);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .floodlight { position:absolute; top:0; width:3px; pointer-events:none; z-index:0; border-radius:2px; }
+    .fl-1 { left:10%; height:70vh; background:linear-gradient(180deg,rgba(255,220,80,0.45) 0%,transparent 100%); filter:blur(10px); animation:fl 5s ease-in-out infinite; }
+    .fl-2 { left:22%; height:60vh; background:linear-gradient(180deg,rgba(255,200,60,0.2) 0%,transparent 100%); filter:blur(14px); animation:fl 7s ease-in-out 1s infinite; }
+    .fl-3 { right:10%; height:70vh; background:linear-gradient(180deg,rgba(255,220,80,0.45) 0%,transparent 100%); filter:blur(10px); animation:fl 6s ease-in-out 0.5s infinite; }
+    .fl-4 { right:22%; height:60vh; background:linear-gradient(180deg,rgba(255,200,60,0.2) 0%,transparent 100%); filter:blur(14px); animation:fl 8s ease-in-out 1.5s infinite; }
+    @keyframes fl { 0%,100%{opacity:0.6;} 50%{opacity:1;} }
+    .ground-glow { position:absolute; bottom:0; left:50%; transform:translateX(-50%); width:700px; height:260px; background:radial-gradient(ellipse,rgba(204,0,0,0.16) 0%,transparent 70%); pointer-events:none; z-index:0; }
+    .hero-crest { margin-bottom:8px; display:flex; justify-content:center; }
+    .hero-crest img { animation:crestFloat 4s ease-in-out infinite; }
+    @keyframes crestFloat { 0%,100%{transform:translateY(0);filter:drop-shadow(0 0 18px rgba(212,160,23,0.5));} 50%{transform:translateY(-8px);filter:drop-shadow(0 0 32px rgba(212,160,23,0.7));} }
+    .hero-season { font-family:var(--font-heading); font-size:0.75rem; letter-spacing:4px; text-transform:uppercase; color:var(--rcb-red); margin-bottom:8px; display:flex; align-items:center; justify-content:center; gap:10px; }
+    .hero-season::before,.hero-season::after { content:''; display:block; width:30px; height:1px; background:var(--rcb-red); }
+    .hero-name { font-family:var(--font-display); font-size:clamp(3rem,9vw,7.5rem); color:#fff; line-height:0.88; letter-spacing:4px; text-shadow:0 0 50px rgba(204,0,0,0.35),0 2px 0 rgba(0,0,0,0.8); animation:heroIn 1s cubic-bezier(.25,.46,.45,.94) 0.4s both; }
+    .hero-name-red { color:var(--rcb-red); display:block; }
+    @keyframes heroIn { from{opacity:0;transform:translateY(36px) scale(0.95);} to{opacity:1;transform:translateY(0) scale(1);} }
+    .hero-number { font-family:var(--font-display); font-size:1.1rem; color:var(--rcb-gold); letter-spacing:8px; margin:6px 0 10px; opacity:0.7; }
+    .hero-role { font-family:var(--font-mono); font-size:1.2rem; color:var(--text-secondary); margin-bottom:6px; }
+    .hero-role #changing-text { color:var(--rcb-gold); }
+    .hero-motto { font-family:var(--font-display); font-size:clamp(1.1rem,3vw,2rem); background:linear-gradient(90deg,var(--rcb-red),var(--rcb-gold),var(--rcb-red)); background-size:200% auto; -webkit-background-clip:text; background-clip:text; color:transparent; letter-spacing:4px; margin:10px 0 20px; animation:textShimmer 4s linear infinite; }
+    @keyframes textShimmer { to{background-position:200% center;} }
+    .hero-buttons { display:flex; gap:14px; justify-content:center; flex-wrap:wrap; margin-bottom:18px; }
+    .hero-social { display:flex; gap:14px; justify-content:center; }
+    .hero-social a { width:40px; height:40px; border:1px solid rgba(212,160,23,0.25); display:flex; align-items:center; justify-content:center; color:var(--text-muted); font-size:1rem; transition:all 0.3s; text-decoration:none; }
+    .hero-social a:hover { border-color:var(--rcb-red); color:var(--rcb-red); background:rgba(204,0,0,0.08); }
+    .scoreboard { width:100%; background:linear-gradient(90deg,var(--rcb-red-dark),#110000,var(--rcb-red-dark)); border-top:1px solid var(--rcb-red); border-bottom:1px solid var(--rcb-red); padding:10px 0; overflow:hidden; position:relative; z-index:2; }
+    .scoreboard-label { position:absolute; left:0; top:0; bottom:0; background:var(--rcb-red); padding:0 16px; display:flex; align-items:center; font-family:var(--font-display); font-size:0.9rem; letter-spacing:2px; color:#fff; z-index:3; white-space:nowrap; }
+    .scoreboard-track { display:flex; animation:tickerRoll 30s linear infinite; padding-left:160px; }
+    .scoreboard:hover .scoreboard-track { animation-play-state:paused; }
+    @keyframes tickerRoll { from{transform:translateX(0);} to{transform:translateX(-50%);} }
+    .ticker-item { font-family:var(--font-heading); font-size:0.85rem; font-weight:700; letter-spacing:3px; color:var(--rcb-gold); white-space:nowrap; padding:0 20px; }
+    .ticker-sep { color:var(--rcb-red); font-size:0.7rem; align-self:center; }
+    .stats-strip { background:var(--rcb-panel); border-bottom:1px solid var(--rcb-line); padding:60px 50px; }
+    .stats-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:2px; max-width:1000px; margin:0 auto; }
+    .stat-card { padding:30px 20px; text-align:center; border-right:1px solid var(--rcb-line); position:relative; }
+    .stat-card:last-child { border-right:none; }
+    .stat-card::before { content:''; position:absolute; top:0; left:50%; transform:translateX(-50%); width:30px; height:2px; background:var(--rcb-red); }
+    .stat-icon { font-size:1.6rem; color:var(--rcb-red); margin-bottom:10px; }
+    .stat-number { font-family:var(--font-display); font-size:3rem; color:var(--rcb-gold); line-height:1; display:block; margin-bottom:6px; }
+    .stat-label { font-family:var(--font-heading); font-size:0.85rem; letter-spacing:2px; text-transform:uppercase; color:var(--text-muted); }
+    .featured { padding:80px 50px; max-width:1200px; margin:0 auto; position:relative; }
+    .featured-grid { display:grid; grid-template-columns:1fr 1fr 1fr; gap:2px; margin-top:48px; }
+    .featured-card { background:var(--rcb-card); border:1px solid rgba(212,160,23,0.1); padding:32px 28px; position:relative; overflow:hidden; transition:all 0.4s var(--ease); text-decoration:none; display:block; }
+    .featured-card::before { content:''; position:absolute; top:0; left:0; width:3px; height:0; background:var(--rcb-red); transition:height 0.4s var(--ease); }
+    .featured-card:hover::before { height:100%; }
+    .featured-card:hover { border-color:rgba(204,0,0,0.3); transform:translateX(4px); }
+    .featured-num { font-family:var(--font-display); font-size:4rem; color:rgba(212,160,23,0.07); line-height:1; margin-bottom:14px; }
+    .featured-icon { font-size:1.8rem; color:var(--rcb-red); margin-bottom:14px; }
+    .featured-card h3 { font-family:var(--font-display); font-size:1.4rem; letter-spacing:2px; color:var(--text-primary); margin-bottom:10px; }
+    .featured-card p { font-size:0.95rem; color:var(--text-secondary); line-height:1.65; }
+    .featured-link { display:inline-flex; align-items:center; gap:8px; margin-top:18px; font-family:var(--font-heading); font-size:0.9rem; font-weight:700; letter-spacing:3px; text-transform:uppercase; color:var(--rcb-gold); transition:gap 0.3s; }
+    .featured-card:hover .featured-link { gap:14px; }
+    @media (max-width:900px) {
+      .stats-grid { grid-template-columns:repeat(2,1fr); }
+      .stat-card:nth-child(2) { border-right:none; }
+      .featured-grid { grid-template-columns:1fr; }
+      .stats-strip,.featured { padding:40px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+<div id="scroll-progress"></div>
+<canvas id="confetti-canvas" style="display: none;"></canvas>
+<div id="easter-egg-flash" class="easter-egg-flash"></div>
+
+<div id="loading-screen">
+  <img src="assets/images/rcb-logo-dark.png" alt="RCB" style="width:110px;height:auto;filter:drop-shadow(0 0 28px rgba(212,160,23,0.7));animation:crestFloat 4s ease-in-out infinite;">
+  <div class="loader-motto">Play Bold · Analyze Bolder</div>
+  <div class="loader-bar-wrap"><div class="loader-bar"></div></div>
+</div>
+
+<header class="main-header">
+  <nav class="navbar">
+    <a href="index.html" class="nav-brand">
+      <img src="assets/images/rcb-logo-dark.png" alt="RCB" style="width:46px;height:auto;filter:drop-shadow(0 0 6px rgba(212,160,23,0.5));">
+      <div class="nav-brand-text">
+        <span class="nav-brand-name">PRAKASH SAI ALLA</span>
+        <span class="nav-brand-sub">Play Bold · Analyze Bolder</span>
+      </div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html" class="current">Dugout</a></li>
+      <li><a href="captain.html">The Captain</a></li>
+      <li><a href="innings.html">Innings</a></li>
+      <li><a href="playbook.html">Playbook</a></li>
+      <li><a href="dressing-room.html">Dressing Room</a></li>
+    </ul>
+    <div class="nav-controls">
+      <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+</header>
+
+<ul class="mobile-nav" id="mobile-nav">
+  <li><a href="index.html" class="current">Dugout</a></li>
+  <li><a href="captain.html">The Captain</a></li>
+  <li><a href="innings.html">Innings</a></li>
+  <li><a href="playbook.html">Playbook</a></li>
+  <li><a href="dressing-room.html">Dressing Room</a></li>
+</ul>
+
+<section class="hero">
+  <div class="floodlight fl-1"></div>
+  <div class="floodlight fl-2"></div>
+  <div class="floodlight fl-3"></div>
+  <div class="floodlight fl-4"></div>
+  <div class="ground-glow"></div>
+  <div class="hero-content">
+    <div class="hero-crest">
+      <img src="assets/images/rcb-logo-dark.png" alt="RCB" style="width:90px;height:90px;object-fit:contain;">
+    </div>
+    <div class="hero-season">MS Business Analytics · UMass Amherst</div>
+    <h1 class="hero-name">PRAKASH SAI <span class="hero-name-red">ALLA</span></h1>
+    <div class="hero-number">· · · DATA CAPTAIN · · ·</div>
+    <p class="hero-role"><span style="color:var(--rcb-red)">▸ </span><span id="changing-text">Data Analyst</span></p>
+    <div class="hero-motto">PLAY BOLD. ANALYZE BOLDER.</div>
+    <div class="hero-buttons">
+      <a href="innings.html" class="btn-rcb"><i class="fas fa-cricket-ball"></i>&nbsp; View Innings</a>
+      <a href="Prakash_Sai_Alla_Resume.pdf" target="_blank" class="btn-rcb-outline"><i class="fas fa-scroll"></i>&nbsp; View Resume</a>
+    </div>
+    <div class="hero-social">
+      <a href="https://linkedin.com/in/prakash-sai-alla" target="_blank"><i class="fab fa-linkedin"></i></a>
+      <a href="https://github.com/prakashsaialla" target="_blank"><i class="fab fa-github"></i></a>
+      <a href="https://instagram.com/prakash.rep" target="_blank"><i class="fab fa-instagram"></i></a>
+      <a href="https://discord.com/users/il_posh" target="_blank"><i class="fab fa-discord"></i></a>
+      <a href="mailto:prakashsaialla34@gmail.com"><i class="fas fa-envelope"></i></a>
+    </div>
+  </div>
+</section>
+
+<div class="scoreboard">
+  <div class="scoreboard-label">🏏 LIVE · PSA</div>
+  <div class="scoreboard-track" id="score-ticker"></div>
+</div>
+
+<section class="stats-strip">
+  <div class="stats-grid">
+    <div class="stat-card">
+      <div class="stat-icon"><i class="fas fa-code"></i></div>
+      <span class="stat-number" data-count="14000">0</span>
+      <div class="stat-label">Lines of Code</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon"><i class="fas fa-database"></i></div>
+      <span class="stat-number" data-count="40">0</span>
+      <div class="stat-label">Datasets Analyzed</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon"><i class="fas fa-trophy"></i></div>
+      <span class="stat-number" data-count="10">0</span>
+      <div class="stat-label">Projects Shipped</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon"><i class="fas fa-star"></i></div>
+      <span class="stat-number" data-count="400">0</span>
+      <div class="stat-label">Query Hours</div>
+    </div>
+  </div>
+</section>
+
+<section class="featured">
+  <div class="section-label">Explore the Franchise</div>
+  <div class="section-heading">MAKE YOUR <em>MOVE</em></div>
+  <div class="featured-grid">
+    <a href="captain.html" class="featured-card" data-reveal>
+      <div class="featured-num">01</div>
+      <div class="featured-icon"><i class="fas fa-user-shield"></i></div>
+      <h3>THE CAPTAIN</h3>
+      <p>Who I am, what drives me and why I play bold with every analysis.</p>
+      <span class="featured-link">Meet the Captain <i class="fas fa-arrow-right"></i></span>
+    </a>
+    <a href="innings.html" class="featured-card" data-reveal>
+      <div class="featured-num">02</div>
+      <div class="featured-icon"><i class="fas fa-cricket-ball"></i></div>
+      <h3>INNINGS</h3>
+      <p>Every project is an innings. Health insurance, Airbnb forecasting, DDoS detection.</p>
+      <span class="featured-link">See the Scorecard <i class="fas fa-arrow-right"></i></span>
+    </a>
+    <a href="playbook.html" class="featured-card" data-reveal>
+      <div class="featured-num">03</div>
+      <div class="featured-icon"><i class="fas fa-scroll"></i></div>
+      <h3>PLAYBOOK</h3>
+      <p>Skills, education, experience, certifications. The complete strategy guide.</p>
+      <span class="featured-link">Read the Playbook <i class="fas fa-arrow-right"></i></span>
+    </a>
+  </div>
+</section>
+
+<footer>
+  <div>
+    <div class="footer-brand">RCB · PSA</div>
+    <div class="footer-motto">Play Bold. Analyze Bolder.</div>
+  </div>
+  <p>© 2026 Prakash Sai Alla · Fan portfolio · Not affiliated with Royal Challengers Bangalore</p>
+</footer>
+
+<script src="assets/script.js"></script>
+</body>
+</html>
